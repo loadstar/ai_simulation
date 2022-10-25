@@ -21,15 +21,15 @@ def get_data():
     dtype = torch.FloatTensor
     X = Variable(torch.from_numpy(train_X).type(dtype), requires_grad=False).view(17, 1)
     y = Variable(torch.from_numpy(train_Y).type(dtype), requires_grad=False)
-    # plot_variable(X, y)
+    plot_variable(X, y)
     return X, y
 
 
 def plot_variable(x, y, z='', **kwargs):
     l = []
     for a in [x, y]:
-        # if type(a) == Variable:
-        l.append(a.data.numpy())
+        #if type(a) == Variable:
+            l.append(a.data.numpy())
     plt.figure()
     plt.plot(l[0], l[1], z, **kwargs)
     plt.show()
@@ -65,7 +65,7 @@ learning_rate = 1e-4
 #     x: object
 x, y = get_data()  # x - represents training data,y - represents target variables
 w, b = get_weights()  # w,b - Learnable parameters
-plot_variable(x, y, 'ro')
+
 
 for i in range(5000):
     y_pred = simple_network(x)  # function which computes wx + b
@@ -77,4 +77,6 @@ for i in range(5000):
     optimize(learning_rate)
 
 print(w.data, b.data.item())
+
+plot_variable(x, y, 'ro')
 plot_variable(x, y_pred, label='Fitted line')
